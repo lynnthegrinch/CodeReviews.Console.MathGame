@@ -93,9 +93,11 @@ do
             {
                 num1 = dice.Next(1, 101);
                 num2 = dice.Next(1, 101);
-                if (num1 % num2 != 0)
+                do
                 {
-                    if (num2 % num1 == 0)
+                    num1 = dice.Next(1, 101);
+                    num2 = dice.Next(1, 101);
+                    if (num1 % num2 == 0)
                     {
                         int div = num2 / num1;
                         Console.WriteLine($"What is the result of {num2} / {num1}");
@@ -104,22 +106,13 @@ do
                         if (result == div) { Console.WriteLine("Correct!"); winsLoss[0] += 1; }
                         else { Console.WriteLine("oops, wrong"); winsLoss[1] += 1; }
                     }
-                    Console.WriteLine("Oops we can't find a good division for you..");
-                    Console.WriteLine();
-                    break;
-                }
-                else
-                {
-                    int div = num1 / num2;
-                    Console.WriteLine($"What is the result of {num1} / {num2}");
-                    string res = Console.ReadLine();
-                    int result = int.Parse(res);
-                    if (result == div) { Console.WriteLine("Correct!"); winsLoss[0] += 1; }
-                    else { Console.WriteLine("oops, wrong"); winsLoss[1] += 1; }
-                }
-                Console.WriteLine();
+                } while (num1 % num2 != 0);
                 continue;
-            }
+    }
+
+
+
+
         default:
             Console.WriteLine("your history is loading..");
             Console.WriteLine($"you have {winsLoss[0]} wins and {winsLoss[1]} losses");
