@@ -17,7 +17,7 @@ string operation;
 Random dice = new Random();
 int num1;
 int num2;
-int [] winsLoss = new int[2] { 0, 0 };
+List<string> history = new List<string>();
 
 do
 {
@@ -36,8 +36,8 @@ do
                 Console.WriteLine($"What is the result of {num1} + {num2}");
                 string res = Console.ReadLine();
                 int result = int.Parse(res);
-                if (result == sum) { Console.WriteLine("Correct!"); winsLoss[0] += 1; }
-                else { Console.WriteLine("oops, wrong"); winsLoss[1] += 1; }
+                if (result == sum) { Console.WriteLine("Correct!"); history.Add($"{num1}+{num2} = {result} (win)");  }
+                else { Console.WriteLine("oops, wrong"); history.Add($"{num1}+{num2} = {result}(loss)"); }
                 Console.WriteLine();
                 continue;
             }
@@ -52,8 +52,8 @@ do
                     Console.WriteLine($"What is the result of {num1} - {num2}");
                     string resu = Console.ReadLine();
                     int result2 = int.Parse(resu);
-                    if (result2 == sub) { Console.WriteLine("Correct!"); winsLoss[0] += 1; }
-                    else { Console.WriteLine("oops, wrong"); winsLoss[1] += 1; }
+                    if (result2 == sub) { Console.WriteLine("Correct!"); history.Add($"{num1}-{num2} = {result2} (win)");  }
+                    else { Console.WriteLine("oops, wrong"); history.Add($"{num1}-{num2} = {result2} (loss)"); }
                 }
                 else if (num2 > num1)
                 {
@@ -61,8 +61,8 @@ do
                     Console.WriteLine($"What is the result of {num2} - {num1}");
                     string resu = Console.ReadLine();
                     int result2 = int.Parse(resu);
-                    if (result2 == sub) { Console.WriteLine("Correct!"); winsLoss[0] += 1; }
-                    else { Console.WriteLine("oops, wrong"); winsLoss[1] += 1; }
+                    if (result2 == sub) { Console.WriteLine("Correct!"); history.Add($"{num2}+{num1} = {result2} (win)");  }
+                    else { Console.WriteLine("oops, wrong"); history.Add($"{num2}+{num1} = {result2} (loss)"); }
                 }
                 else
                 {
@@ -70,8 +70,8 @@ do
                     Console.WriteLine($"What is the result of {num1} - {num2}");
                     string resu = Console.ReadLine();
                     int result2 = int.Parse(resu);
-                    if (result2 == sub) { Console.WriteLine("Correct!"); winsLoss[0] += 1; }
-                    else { Console.WriteLine("oops, wrong"); winsLoss[1] += 1; }
+                    if (result2 == sub) { Console.WriteLine("Correct!"); history.Add($"{num1}+{num2} = {result2} (win)"); }
+                    else { Console.WriteLine("oops, wrong"); history.Add($"{num1}+{num2} = {result2} (loss)"); }
                 }
                 Console.WriteLine();
                 continue;
@@ -84,8 +84,8 @@ do
                 Console.WriteLine($"What is the result of {num1} * {num2}");
                 string res = Console.ReadLine();
                 int result = int.Parse(res);
-                if (result == mult) { Console.WriteLine("Correct!"); winsLoss[0] += 1; }
-                else { Console.WriteLine("oops, wrong"); winsLoss[1] += 1; }
+                if (result == mult) { Console.WriteLine("Correct!"); history.Add($"{num1}*{num2} = {result} (win)"); }
+                else { Console.WriteLine("oops, wrong"); history.Add($"{num1}*{num2} = {result} (loss)"); }
                 Console.WriteLine();
                 continue;
             }
@@ -99,25 +99,23 @@ do
                     num2 = dice.Next(1, 101);
                     if (num1 % num2 == 0)
                     {
-                        int div = num2 / num1;
-                        Console.WriteLine($"What is the result of {num2} / {num1}");
+                        int div = num1 / num2;
+                        Console.WriteLine($"What is the result of {num1} / {num2}");
                         string res = Console.ReadLine();
                         int result = int.Parse(res);
-                        if (result == div) { Console.WriteLine("Correct!"); winsLoss[0] += 1; }
-                        else { Console.WriteLine("oops, wrong"); winsLoss[1] += 1; }
+                        if (result == div) { Console.WriteLine("Correct!"); history.Add($"{num1}/{num2} = {result} (win)"); }
+                        else { Console.WriteLine("oops, wrong"); history.Add($"{num1}/{num2} = {result} (loss)"); }
                     }
                 } while (num1 % num2 != 0);
                 continue;
     }
 
-
-
-
         default:
             Console.WriteLine("your history is loading..");
-            Console.WriteLine($"you have {winsLoss[0]} wins and {winsLoss[1]} losses");
-            Console.WriteLine();
-            break;
+        foreach (string item in history)
+            Console.WriteLine(item);
+            
+            continue;
     }
 } while (cal);
     
