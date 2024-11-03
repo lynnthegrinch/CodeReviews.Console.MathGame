@@ -10,7 +10,7 @@
 
 
 using System.ComponentModel.Design;
-using System.Diagnostics.CodeAnalysis;
+
 
 bool cal = true;
 string operation;
